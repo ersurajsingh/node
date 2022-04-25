@@ -1,4 +1,5 @@
-const request = require('request')
+const request = require('request');
+const { httpConstants } = require('../common/constants');
 
 class HTTPService {
   /**
@@ -14,7 +15,7 @@ class HTTPService {
       }, function (error, response, body) {
         // console.log('body:-', body);
         if (error) {
-          console.log('err' + error)
+          lhtWebLog('executeHTTPRequest', error.message, error, 'AyushK', httpConstants.LOG_LEVEL_TYPE.ERROR);
           reject(error)
         } else {
           fulfill(body)

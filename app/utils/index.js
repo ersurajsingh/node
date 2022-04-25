@@ -4,6 +4,7 @@
 
 'use strict'
 import { apiFailureMessage, httpConstants } from '../common/constants'
+import Config from '../../config'
 
 export default class Utils {
   static response (res, data, message, success, code) {
@@ -82,6 +83,7 @@ export default class Utils {
    * @constructor
    */
   static lhtLog (functionName, message, payload, developerAlias, logType = 'INFO') {
-    console.log(`[ ${this.getFormattedDate()} ] ${logType}: ${functionName}: ${message}: ${JSON.stringify(payload)}: Developer : ${developerAlias}`)
+    if(Config.IS_CONSOLE_LOG === 'true')
+      console.log(`[ ${Utils.getFormattedDate()} ] ${logType}: ${functionName}: ${message}: ${JSON.stringify(payload)}: Developer : ${developerAlias}`)
   }
 }

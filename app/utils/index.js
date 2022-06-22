@@ -74,16 +74,4 @@ export default class Utils {
     return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
   }
 
-  /**
-   * @param functionName
-   * @param message
-   * @param payload:should be in object form
-   * @param developerAlias
-   * @param logType ["INFO", "WARNING", "ERROR"]
-   * @constructor
-   */
-  static lhtLog (functionName, message, payload, developerAlias, logType = 'INFO') {
-    if(Config.IS_CONSOLE_LOG === 'true')
-      console.log(`[ ${Utils.getFormattedDate()} ] ${logType}: ${functionName}: ${message}: ${JSON.stringify(payload)}: Developer : ${developerAlias}`)
-  }
 }

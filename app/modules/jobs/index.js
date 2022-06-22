@@ -1,10 +1,9 @@
-import BLManager from './manager'
-import { httpConstants } from '../../common/constants'
+import BLManager from "./manager";
 
 export default class JobController {
-  static async monitorMeter () {
+  static async monitorMeter() {
     await BLManager.monitorMeters().catch((err) =>
-      lhtWebLog('monitorMeter', 'Job Failed', err, 'developer', httpConstants.LOG_LEVEL_TYPE.ERROR)
-    )
+      lhtWebLog.error(`monitorMeter`, "Job Failed", err)
+    );
   }
 }

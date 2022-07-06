@@ -1,28 +1,29 @@
-const request = require('request');
-const { httpConstants } = require('../common/constants');
+const request = require("request");
 
 class HTTPService {
   /**
    * execute Http request
    */
-  static async executeHTTPRequest (method, hostname, path, data, headers) {
+  static async executeHTTPRequest(method, hostname, path, data, headers) {
     return await new Promise(function (fulfill, reject) {
-      request({
-        url: hostname + path,
-        method: method,
-        headers: headers,
-        json: data
-      }, function (error, response, body) {
-        // console.log('body:-', body);
-        if (error) {
-          lhtWebLog('executeHTTPRequest', error.message, error, 'AyushK', httpConstants.LOG_LEVEL_TYPE.ERROR);
-          reject(error)
-        } else {
-          fulfill(body)
+      request(
+        {
+          url: hostname + path,
+          method: method,
+          headers: headers,
+          json: data,
+        },
+        function (error, response, body) {
+          if (error) {
+            lhtWebLog.error("executeHTTPRequest", error.message, error);
+            reject(error);
+          } else {
+            fulfill(body);
+          }
         }
-      })
-    })
+      );
+    });
   }
 }
 
-module.exports = HTTPService
+module.exports = HTTPService;

@@ -1,12 +1,14 @@
 import APP from "express";
 import DBConnection from "./config/dbConnection";
 import LhtLogger from "./app/utils/logger";
+import HTTPHandler from "./app/utils/HTTPHandler";
 import Config from "./config";
 import routes from "./routes";
 
 const app = new APP();
 require("./config/express")(app);
 global.lhtWebLog = LhtLogger;
+global.httpResponse = HTTPHandler;
 
 class Server {
   static listen() {

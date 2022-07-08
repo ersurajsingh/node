@@ -1,7 +1,21 @@
-import { httpConstants } from "../common/constants";
+import {
+  apiFailureMessage,
+  apiSuccessMessage,
+  httpConstants,
+} from "../common/constants";
 
 export default class HTTPHandler {
-  static success(res, data, message) {
+  static success(res, data, message = apiSuccessMessage.FETCH_SUCCESS) {
+    HTTPHandler.response(
+      res,
+      data,
+      message,
+      httpConstants.RESPONSE_STATUS.SUCCESS,
+      httpConstants.RESPONSE_CODES.OK
+    );
+  }
+
+  static accepted(res, data, message = apiSuccessMessage.POST_SUCCESS_MESSAGE) {
     HTTPHandler.response(
       res,
       data,
@@ -41,7 +55,7 @@ export default class HTTPHandler {
     );
   }
 
-  static error(res, data, message) {
+  static error(res, data, message = apiFailureMessage.INTERNAL_SERVER_ERROR) {
     HTTPHandler.response(
       res,
       data,

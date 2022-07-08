@@ -4,6 +4,8 @@
 
 "use strict";
 
+import { apiFailureMessage, httpConstants } from "../common/constants";
+
 export default class Utils {
   /**
    * This function is made to handle success and error callback!
@@ -16,6 +18,13 @@ export default class Utils {
         return [null, data];
       })
       .catch((err) => [err]);
+  }
+
+  static returnRejection(
+    message = apiFailureMessage.INTERNAL_SERVER_ERROR,
+    code = httpConstants.RESPONSE_CODES.SERVER_ERROR
+  ) {
+    return Promise.reject({ message, code });
   }
 
   static getFormattedDate() {

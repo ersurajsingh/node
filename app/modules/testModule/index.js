@@ -1,14 +1,14 @@
-import Utils from '../../utils'
-import {apiSuccessMessage, httpConstants} from '../../common/constants'
-import BLManager from './manger'
+import Utils from "../../utils";
+import BLManager from "./manger";
+import HTTPHandler from "../../utils/HTTPHandler";
 
 export default class Index {
-    async testRoute(request, response) {
-        lhtWebLog.info('TestController:testRoute', "Inside testRoute", request.body)
-        const [error, getMetersRes] = await Utils.parseResponse(new BLManager().testMethod(request.body))
-        if (!getMetersRes) {
-            return Utils.handleError(error, request, response)
-        }
-        return Utils.response(response, getMetersRes, apiSuccessMessage.FETCH_SUCCESS, httpConstants.RESPONSE_STATUS.SUCCESS, httpConstants.RESPONSE_CODES.OK)
-    }
+  async testRoute(request, response) {
+    lhtWebLog.info("TestController", "testRoute", request.body);
+    const [error, testResponse] = await Utils.parseResponse(
+      new BLManager().testMethod(request.body)
+    );
+    if (!testResponse) return HTTPHandler.error(response, error);
+    return HTTPHandler.success(response, testResponse);
+  }
 }

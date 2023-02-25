@@ -3,7 +3,9 @@ import {
   apiSuccessMessage,
   httpConstants,
 } from "../common/constants";
+import LHTLogger from "./logger";
 
+//todo: improve
 export default class HTTPHandler {
   static success(res, data, message = apiSuccessMessage.FETCH_SUCCESS) {
     HTTPHandler.response(
@@ -55,13 +57,15 @@ export default class HTTPHandler {
     );
   }
 
-  static error(res, data, message = apiFailureMessage.INTERNAL_SERVER_ERROR) {
+  static error(res, error, message = apiFailureMessage.INTERNAL_SERVER_ERROR) {
+    LHTLogger.error("Http Error handler", message, error, "", error ? error.stack : "");
+    const statusCode = (error && error.statusCode) ? error.statusCode : httpConstants.RESPONSE_CODES.SERVER_ERROR;
     HTTPHandler.response(
       res,
-      data,
+      error,
       message,
       httpConstants.RESPONSE_STATUS.FAILURE,
-      httpConstants.RESPONSE_CODES.SERVER_ERROR
+      statusCode
     );
   }
 
@@ -82,6 +86,7 @@ export default class HTTPHandler {
       success: success,
       responseCode: code,
     };
+    res.status(code)
     res.format({
       json: () => {
         res.send(responseObj);

@@ -1,8 +1,16 @@
-export default class Manger {
-  testMethod = async (requestData) => {
-    // API business logic
+import LHTLogger from "../../utils/logger";
 
-    // if (error) return Utils.returnRejection("User not found");
-    return undefined;
+export default class Manger {
+  successMethod = async (requestData) => {
+    // API business logic
+    LHTLogger.info("testModule:successMethod", "Api success");
+    return true;
+  };
+
+  failureMethod = async (requestData) => {
+    const error = new Error();
+    error.statusCode = 404; // optional custom status code
+    // LHTLogger.error("testModule:failureMethod", "Api Faliure", {}, "", error.stack);
+    throw error
   };
 }

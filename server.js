@@ -5,6 +5,7 @@ import HTTPHandler from "./app/utils/HTTPHandler";
 import Config from "./config";
 import routes from "./routes";
 
+//todo change all to es6
 const app = new APP();
 require("./config/express")(app);
 global.lhtWebLog = LhtLogger;
@@ -26,3 +27,4 @@ class Server {
 }
 
 Server.listen();
+module.exports = app;

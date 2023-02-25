@@ -1,10 +1,17 @@
 const request = require("request");
+import axios from "axios";
 
-class HTTPService {
+//todo: use axios
+export default class HTTPService {
   /**
-   * execute Http request
+   * This function is made to execute http request!
+   * @param method
+   * @param hostname
+   * @param path
+   * @param headers
+   * @param data
    */
-  static async executeHTTPRequest(method, hostname, path, data, headers) {
+  static async executeHTTPRequest(method, hostname, path, headers, data) {
     return await new Promise(function (fulfill, reject) {
       request(
         {
@@ -26,4 +33,3 @@ class HTTPService {
   }
 }
 
-module.exports = HTTPService;

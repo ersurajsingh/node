@@ -1,5 +1,6 @@
 import JobController from "../modules/jobs";
 
+//todo: change to node-cron
 const CronMasterJob = require("cron-master").CronMasterJob;
 
 module.exports = new CronMasterJob({

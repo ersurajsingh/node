@@ -3,10 +3,18 @@ import BLManager from "./manger";
 import HTTPHandler from "../../utils/HTTPHandler";
 
 export default class Index {
-  async testRoute(request, response) {
-    lhtWebLog.info("TestController", "testRoute", request.body);
+  async successRoute(request, response) {
+    lhtWebLog.info("TestController", "successMethod", request.query);
     const [error, testResponse] = await Utils.parseResponse(
-      new BLManager().testMethod(request.body)
+      new BLManager().successMethod(request.query)
+    );
+    if (!testResponse) return HTTPHandler.error(response, error);
+    return HTTPHandler.success(response, testResponse);
+  }
+  async failureRoute(request, response) {
+    lhtWebLog.info("TestController", "failureMethod", request.query);
+    const [error, testResponse] = await Utils.parseResponse(
+      new BLManager().failureMethod(request.query)
     );
     if (!testResponse) return HTTPHandler.error(response, error);
     return HTTPHandler.success(response, testResponse);

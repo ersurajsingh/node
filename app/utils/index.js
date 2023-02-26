@@ -22,25 +22,13 @@ export default class Utils {
 
   static returnRejection(
     message = apiFailureMessage.INTERNAL_SERVER_ERROR,
-    code = httpConstants.RESPONSE_CODES.SERVER_ERROR
+    statusCode = httpConstants.RESPONSE_CODES.SERVER_ERROR
   ) {
-    return Promise.reject({ message, code });
+    return Promise.reject({ message, statusCode });
   }
 
   static getFormattedDate() {
     const date = new Date();
-    return (
-      date.getFullYear() +
-      "-" +
-      (date.getMonth() + 1) +
-      "-" +
-      date.getDate() +
-      " " +
-      date.getHours() +
-      ":" +
-      date.getMinutes() +
-      ":" +
-      date.getSeconds()
-    );
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
   }
 }

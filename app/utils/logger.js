@@ -3,6 +3,13 @@ import Utils from "./index";
 import { httpConstants } from "../common/constants";
 
 export default class LHTLogger {
+  /**
+   * It logs the message with the log level as INFO.
+   * @param functionName - The name of the function that is logging the message.
+   * @param message - The message you want to log.
+   * @param [payload] - This is the object that you want to log.
+   * @param [devAlias] - This is the alias of the developer who is logging the message.
+   */
   static info(functionName, message, payload = {}, devAlias = "") {
     LHTLogger.log(
       functionName,
@@ -13,6 +20,13 @@ export default class LHTLogger {
     );
   }
 
+  /**
+   * It logs a message with the log level of DEBUG.
+   * @param functionName - The name of the function that is calling the logger.
+   * @param message - The message you want to log.
+   * @param [payload] - This is the object that you want to log.
+   * @param [devAlias] - This is the alias of the developer who is logging the message.
+   */
   static debug(functionName, message, payload = {}, devAlias = "") {
     LHTLogger.log(
       functionName,
@@ -23,6 +37,13 @@ export default class LHTLogger {
     );
   }
 
+  /**
+   * It logs a message with a log level of WARN.
+   * @param functionName - The name of the function that is calling the logger.
+   * @param message - The message you want to log.
+   * @param [payload] - This is an object that contains the data that you want to log.
+   * @param [devAlias] - This is the alias of the developer who is logging the message.
+   */
   static warn(functionName, message, payload = {}, devAlias = "") {
     LHTLogger.log(
       functionName,
@@ -33,7 +54,16 @@ export default class LHTLogger {
     );
   }
 
-  static error(functionName, message, payload = {}, devAlias = "", errorStack) {
+  /**
+   * It logs an error message to the console.
+   * @param functionName - The name of the function that is logging the error.
+   * @param message - The message you want to log.
+   * @param [payload] - This is the data that you want to log.
+   * @param errorStack - This is the stack trace of the error.
+   * @param [devAlias] - This is the developer alias that you want to use to identify the developer who
+   * is logging the error.
+   */
+  static error(functionName, message, payload = {}, errorStack = "", devAlias = "") {
     const errorOrigin = LHTLogger.parseErrorStack(errorStack);
     LHTLogger.log(
       functionName,

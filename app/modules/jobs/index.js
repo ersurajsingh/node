@@ -1,9 +1,10 @@
 import BLManager from "./manager";
+import LHTLogger from "../../utils/logger";
 
 export default class JobController {
   static async monitorMeter() {
     await BLManager.monitorMeters().catch((err) =>
-      lhtWebLog.error(`monitorMeter`, "Job Failed", err)
+      LHTLogger.error(`monitorMeter`, "Job Failed", err)
     );
   }
 }

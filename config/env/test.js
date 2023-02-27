@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   PORT: process.env.PORT || '3000',
   DB: process.env.DB || '',
   IS_DOCUMENT_DB: process.env.IS_DOCUMENT_DB || 'false',

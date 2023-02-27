@@ -20,6 +20,12 @@ export default class Utils {
       .catch((err) => [err]);
   }
 
+  /**
+   * It returns a promise that rejects with a message and status code
+   * @param [message] - The message that will be returned to the client.
+   * @param [statusCode] - The HTTP status code that will be returned to the client.
+   * @returns A promise that is rejected with an object containing a message and a status code.
+   */
   static returnRejection(
     message = apiFailureMessage.INTERNAL_SERVER_ERROR,
     statusCode = httpConstants.RESPONSE_CODES.SERVER_ERROR

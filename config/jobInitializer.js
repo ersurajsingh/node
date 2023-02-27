@@ -1,5 +1,6 @@
 import JobController from "../app/modules/jobs";
 import cron from "node-cron";
+import LHTLogger from "../app/utils/logger";
 
 /*
   ┌────────────── second(optional)
@@ -11,6 +12,6 @@ import cron from "node-cron";
   * * * * * *
 */
 cron.schedule('* * * * *', async () => {
-  lhtWebLog.info("Cron:schedule", "cron job running");
+  LHTLogger.info("Cron:schedule", "cron job running");
   await JobController.monitorMeter();
 });

@@ -1,10 +1,11 @@
 import Utils from "../../utils";
 import BLManager from "./manger";
 import HTTPHandler from "../../utils/HTTPHandler";
+import LHTLogger from "../../utils/logger";
 
 export default class Index {
   async successRoute(request, response) {
-    lhtWebLog.info("TestController", "successMethod", request.query);
+    LHTLogger.info("TestController", "successMethod", request.query);
     const [error, testResponse] = await Utils.parseResponse(
       new BLManager().successMethod(request.query)
     );
@@ -12,7 +13,7 @@ export default class Index {
     return HTTPHandler.success(response, testResponse);
   }
   async failureRoute(request, response) {
-    lhtWebLog.info("TestController", "failureMethod", request.query);
+    LHTLogger.info("TestController", "failureMethod", request.query);
     const [error, testResponse] = await Utils.parseResponse(
       new BLManager().failureMethod(request.query)
     );

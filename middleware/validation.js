@@ -2,7 +2,7 @@ import * as yup from "yup";
 import HTTPHandler from "../app/utils/HTTPHandler";
 
 
-const ValidationManger = {
+export default {
   validateUserLogin: async (req, res, next) => {
     const schema = yup.object().shape({
       email: yup.string().email(),
@@ -24,5 +24,3 @@ const validate = async (schema, reqData, res, next) => {
     HTTPHandler.validationError(res, errors);
   }
 };
-
-export default ValidationManger;

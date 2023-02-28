@@ -5,7 +5,6 @@ import {
 } from "../common/constants";
 import LHTLogger from "./logger";
 
-//todo: improve
 export default class HTTPHandler {
   static success(res, data, message = apiSuccessMessage.FETCH_SUCCESS) {
     HTTPHandler.response(

@@ -1,13 +1,12 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const expect = chai.expect;
-const app = require('../server');
-chai.use(chaiHttp);
+import { expect, use, request } from 'chai';
+import chaiHttp from 'chai-http';
+import app from '../server';
+use(chaiHttp);
 
 describe('Test succes route', () => {
   describe('GET success-route', () => {
-    it('should return status code 200 and expected data', async () => {
-      const res = await chai.request(app).get('/success-route');
+    it('should return status code 200', async () => {
+      const res = await request(app).get('/success-route');
       expect(res).to.have.status(200);
     });
   });

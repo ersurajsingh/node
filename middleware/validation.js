@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import HTTPHandler from "../app/utils/HTTPHandler";
+import HTTPHandler from "../app/utils/httpHandler";
 
 
 export default {

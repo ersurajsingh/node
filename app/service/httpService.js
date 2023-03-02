@@ -1,4 +1,5 @@
 import axios from "axios";
+import LHTLogger from "../utils/logger";
 
 export default class HTTPService {
   /**
@@ -12,7 +13,7 @@ export default class HTTPService {
    * @returns The data from the response.
    * @error Throws an error if api request fails
    */
-  static async executeHTTPRequest(method, hostname, path, headers, data) {
+  async executeHTTPRequest(method, hostname, path, headers, data) {
     try {
       const { data: responseData } = await axios({
         method,
@@ -22,7 +23,7 @@ export default class HTTPService {
       });
       return responseData;
     } catch (error) {
-      console.error("executeHTTPRequest", error.message, error.stack);
+      LHTLogger.error("httpService:executeHTTPRequest", error.message, {}, error.stack, "Guna R");
       throw error;
     }
   }

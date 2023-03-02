@@ -5,8 +5,8 @@ import ValidationManger from "../middleware/validation";
 import TestModule from "../app/modules/testModule";
 import {stringConstants} from "../app/common/constants";
 
-module.exports = (app) => {
-    app.get('/', (req, res) => res.send(stringConstants.SERVICE_STATUS_HTML));
+export default (app) => {
+    app.get('/', (_req, res) => res.send(stringConstants.SERVICE_STATUS_HTML));
 
     /**
      * route definition

@@ -11,7 +11,7 @@ import LHTLogger from "../app/utils/logger";
   │ │ │ │ │ ┌──── day of week
   * * * * * *
 */
-cron.schedule('* * * * *', async () => {
+cron.schedule('0 1 * * *', async () => {
   LHTLogger.info("Cron:schedule", "cron job running");
   await JobController.monitorMeter();
 });

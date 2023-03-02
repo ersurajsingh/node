@@ -1,7 +1,7 @@
 import APP from "express";
 import DBConnection from "./config/dbConnection";
 import LhtLogger from "./app/utils/logger";
-import HTTPHandler from "./app/utils/HTTPHandler";
+import HTTPHandler from "./app/utils/httpHandler";
 import Config from "./config";
 import routes from "./routes";
 
@@ -15,10 +15,11 @@ class Server {
       await DBConnection.connect()
       app.listen(Config.PORT);
       routes(app);
-      require("./config/jobInitializer");
-      LhtLogger.info("Server:listen", `Server Started on ${Config.PORT}`);
+      import("./config/jobInitializer");
+      LhtLogger.info("Server:listen", `Server Started on ${Config.PORT}`, {}, "Ayush K");
     } catch (error) {
-      LhtLogger.error("Server:listen", "failed to connect", { err: error })
+      LhtLogger.error("Server:listen", "failed to connect", { err: error });
+      process.exit(1);
     }
   }
 }

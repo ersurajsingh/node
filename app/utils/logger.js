@@ -1,5 +1,5 @@
 import Config from "../../config";
-import Utils from "./index";
+import { DateTimeHelper } from ".";
 import { httpConstants } from "../common/constants";
 
 export default class LHTLogger {
@@ -76,8 +76,8 @@ export default class LHTLogger {
   }
 
   static log(functionName, message, payload, devAlias, logType, errorOrigin = "") {
-    if (Config.IS_CONSOLE_LOG !== "true" && logType !== httpConstants.LOG_LEVEL_TYPE.ERROR ) return;
-    let logString = `[${Utils.getFormattedDate()}] ${logType} ${errorOrigin}: ${functionName}: ${message}: ${JSON.stringify(
+    if (Config.IS_CONSOLE_LOG !== "true" && logType !== httpConstants.LOG_LEVEL_TYPE.ERROR) return;
+    let logString = `[${DateTimeHelper.getFormattedDate()}] ${logType} ${errorOrigin}: ${functionName}: ${message}: ${JSON.stringify(
       payload
     )}: Developer : ${devAlias}`;
     switch (logType) {

@@ -11,22 +11,31 @@ const templateSchema = new mongoose.Schema({
 });
 
 templateSchema.method({
-  saveData: async () => this.save(),
-});
+  saveData: async function () {
+    return this.save()
+  }
+})
 
 templateSchema.static({
-  findData: (findObj) => this.find(findObj),
+  findData: function (findObj) {
+    return this.find(findObj)
+  },
 
-  findOneData: (findObj) => this.findOne(findObj),
+  findOneData: function (findObj) {
+    return this.findOne(findObj)
+  },
 
-  findOneAndUpdateData: (findObj, updateObj) =>
-    this.findOneAndUpdate(findObj, updateObj, {
+  findOneAndUpdateData: function (findObj, updateObj) {
+    return this.findOneAndUpdate(findObj, updateObj, {
       upsert: true,
       new: true,
-      setDefaultsOnInsert: true,
-    }),
+      setDefaultsOnInsert: true
+    })
+  },
 
-  findDataWithAggregate: (findObj) => this.aggregate(findObj),
-});
+  findDataWithAggregate: function (findObj) {
+    return this.aggregate(findObj)
+  },
+})
 
 export default mongoose.model("nq-template", templateSchema);

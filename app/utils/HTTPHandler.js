@@ -5,9 +5,9 @@ import {
 } from "../common/constants";
 import LHTLogger from "./logger";
 
-export default class HTTPHandler {
-  success(res, data, message = apiSuccessMessage.FETCH_SUCCESS) {
-    HTTPHandler.response(
+export default class httpHandler {
+  static success(res, data, message = apiSuccessMessage.FETCH_SUCCESS) {
+    httpHandler.response(
       res,
       data,
       message,
@@ -16,8 +16,8 @@ export default class HTTPHandler {
     );
   }
 
-  accepted(res, data, message = apiSuccessMessage.POST_SUCCESS_MESSAGE) {
-    HTTPHandler.response(
+ static accepted(res, data, message = apiSuccessMessage.POST_SUCCESS_MESSAGE) {
+    httpHandler.response(
       res,
       data,
       message,
@@ -26,8 +26,8 @@ export default class HTTPHandler {
     );
   }
 
-  unauthorized(res, data, message) {
-    HTTPHandler.response(
+  static unauthorized(res, data, message) {
+    httpHandler.response(
       res,
       data,
       message,
@@ -36,8 +36,8 @@ export default class HTTPHandler {
     );
   }
 
-  badRequest(res, data, message) {
-    HTTPHandler.response(
+ static badRequest(res, data, message) {
+    httpHandler.response(
       res,
       data,
       message,
@@ -46,8 +46,8 @@ export default class HTTPHandler {
     );
   }
 
-  notFoundError(res, data, message) {
-    HTTPHandler.response(
+  static notFoundError(res, data, message) {
+    httpHandler.response(
       res,
       data,
       message,
@@ -56,10 +56,10 @@ export default class HTTPHandler {
     );
   }
 
-  error(res, error, message = apiFailureMessage.INTERNAL_SERVER_ERROR) {
-    LHTLogger.error("HTTPHandler:error", message, error, error ? error.stack : "", "Guna R");
+  static error(res, error, message = apiFailureMessage.INTERNAL_SERVER_ERROR) {
+    LHTLogger.error("httpHandler:error", message, error, error ? error.stack : "", "Guna R");
     const statusCode = (error && error.statusCode) ? error.statusCode : httpConstants.RESPONSE_CODES.SERVER_ERROR;
-    HTTPHandler.response(
+    httpHandler.response(
       res,
       error,
       message,
@@ -68,8 +68,8 @@ export default class HTTPHandler {
     );
   }
 
-  validationError(res, errorArray) {
-    HTTPHandler.response(
+  static validationError(res, errorArray) {
+    httpHandler.response(
       res,
       errorArray,
       "Invalid Request!",
@@ -78,7 +78,7 @@ export default class HTTPHandler {
     );
   }
 
-  response(res, data, message, success, code) {
+  static response(res, data, message, success, code) {
     const responseObj = {
       responseData: data,
       message: message,

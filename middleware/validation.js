@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import HTTPHandler from "../app/utils/httpHandler";
+import httpHandler from "../app/utils/httpHandler";
 
 
 export default {
@@ -21,6 +21,6 @@ const validate = async (schema, reqData, res, next) => {
       message,
       value,
     }));
-    HTTPHandler.validationError(res, errors);
+    httpHandler.validationError(res, errors);
   }
 };

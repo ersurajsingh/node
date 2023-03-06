@@ -13,7 +13,7 @@ export default class Utils {
    * @param promise
    * @returns {Promise<Promise|Bluebird<*[] | R>|Bluebird<any | R>|*|Promise<T | *[]>>}
    */
-  async parseResponse(promise) {
+  static async parseResponse(promise) {
     return promise
       .then((data) => {
         return [null, data];
@@ -27,7 +27,7 @@ export default class Utils {
    * @param [statusCode] - The HTTP status code that will be returned to the client.
    * @returns A promise that is rejected with an object containing a message and a status code.
    */
-  returnRejection(
+  static returnRejection(
     message = apiFailureMessage.INTERNAL_SERVER_ERROR,
     statusCode = httpConstants.RESPONSE_CODES.SERVER_ERROR
   ) {

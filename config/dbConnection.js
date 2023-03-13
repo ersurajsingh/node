@@ -1,10 +1,11 @@
 import Config from ".";
 import mongoose from "mongoose";
 import fs from "fs";
+import LHTLogger from "../app/utils/logger";
 
 export default class DBConnection {
-  static connect() {
-    lhtWebLog.info("DBConnection", `DB trying to connect with ${Config.DB}`);
+  static async connect() {
+    LHTLogger.info("DBConnection", `DB trying to connect with ${Config.DB}`, {}, "Ayush K");
 
     const options = DBConnection.getDBConnectOptions();
     return mongoose.connect(Config.DB, options);

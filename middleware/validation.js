@@ -1,13 +1,13 @@
 import * as yup from "yup";
 import HTTPHandler from "../app/utils/HTTPHandler";
 
-module.exports = {
+
+export default {
   validateUserLogin: async (req, res, next) => {
     const schema = yup.object().shape({
       email: yup.string().email(),
-      password: yup.string().min(8).required(),
     });
-    await validate(schema, req.body, res, next);
+    await validate(schema, req.query, res, next);
   },
 };
 

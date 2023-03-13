@@ -1,16 +1,15 @@
-FROM node:12
+FROM node:18-alpine
+# update package sources list
+RUN apt update
 # Create app directory
 RUN mkdir -p /usr/src/app
 # Create working directory
 WORKDIR /usr/src/app
-# Copy pacakge.json
-COPY package.json /usr/src/app/
-# Install app dependencies
-RUN npm install
-RUN npm install -g forever
 # Bundle app source
 COPY . /usr/src/app
+# Install app dependencies
+RUN npm install --production
 # Expose port
-EXPOSE 3000-3100
+EXPOSE 3000
 # Start npm
-CMD [ "npm", "test" ]
+CMD [ "npm", "start" ]

@@ -3,6 +3,7 @@ import {
   apiSuccessMessage,
   httpConstants,
 } from "../common/constants";
+import LHTLogger from "./logger";
 
 export default class HTTPHandler {
   static success(res, data, message = apiSuccessMessage.FETCH_SUCCESS) {
@@ -15,7 +16,7 @@ export default class HTTPHandler {
     );
   }
 
-  static accepted(res, data, message = apiSuccessMessage.POST_SUCCESS_MESSAGE) {
+ static accepted(res, data, message = apiSuccessMessage.POST_SUCCESS_MESSAGE) {
     HTTPHandler.response(
       res,
       data,
@@ -35,7 +36,7 @@ export default class HTTPHandler {
     );
   }
 
-  static badRequest(res, data, message) {
+ static badRequest(res, data, message) {
     HTTPHandler.response(
       res,
       data,
@@ -55,13 +56,15 @@ export default class HTTPHandler {
     );
   }
 
-  static error(res, data, message = apiFailureMessage.INTERNAL_SERVER_ERROR) {
+  static error(res, error, message = apiFailureMessage.INTERNAL_SERVER_ERROR) {
+    LHTLogger.error("HTTPHandler:error", message, error, error ? error.stack : "", "Guna R");
+    const statusCode = (error && error.statusCode) ? error.statusCode : httpConstants.RESPONSE_CODES.SERVER_ERROR;
     HTTPHandler.response(
       res,
-      data,
+      error,
       message,
       httpConstants.RESPONSE_STATUS.FAILURE,
-      httpConstants.RESPONSE_CODES.SERVER_ERROR
+      statusCode
     );
   }
 
@@ -82,6 +85,7 @@ export default class HTTPHandler {
       success: success,
       responseCode: code,
     };
+    res.status(code)
     res.format({
       json: () => {
         res.send(responseObj);

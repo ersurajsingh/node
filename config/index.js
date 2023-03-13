@@ -2,21 +2,21 @@
  * Created by AyushK on 17/09/20.
  */
 
-const path = require('path')
-const extend = require('util')._extend
-const local = require('./env/local')
-const development = require('./env/development')
-const test = require('./env/test')
-const production = require('./env/production')
+import { normalize } from 'path'
+import { _extend as extend } from 'util'
+import local from './env/local'
+import development from './env/development'
+import test from './env/test'
+import production from './env/production'
 const defaults = {
-  root: path.normalize(__dirname + '/..')
+  root: normalize(__dirname + '/..')
 }
 
 /**
  * Expose
  */
 
-module.exports = {
+export default {
   development: extend(development, defaults),
   test: extend(test, defaults),
   production: extend(production, defaults),

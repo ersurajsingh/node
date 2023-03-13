@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:18-alpine
 # update package sources list
 RUN apt update
 # Create app directory
@@ -10,6 +10,6 @@ COPY . /usr/src/app
 # Install app dependencies
 RUN npm install --production
 # Expose port
-EXPOSE 3000-3100
+EXPOSE 3000
 # Start npm
 CMD [ "npm", "start" ]

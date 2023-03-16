@@ -2,7 +2,7 @@
  * Created by AyushK on 18/09/20.
  */
 import ValidationManger from "../middleware/validation";
-import TestModule from "../app/modules/testModule";
+import Template from "../app/modules/Template";
 import {stringConstants} from "../app/common/constants";
 
 export default (app) => {
@@ -11,6 +11,6 @@ export default (app) => {
     /**
      * route definition
      */
-    app.get("/success-route", ValidationManger.validateUserLogin, new TestModule().successRoute);
-    app.get("/failure-route",  new TestModule().failureRoute);
+    app.get("/success-route", ValidationManger.validateUserLogin, new Template().successRoute);
+    app.get("/failure-route",  new Template().failureRoute);
 };

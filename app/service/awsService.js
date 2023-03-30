@@ -3,12 +3,12 @@ import AWS from "aws-sdk";
 import fs from "fs";
 import LHTLogger from "../utils/logger";
 
-const s3Bucket = new AWS.S3();
 AWS.config.update({
   accessKeyId: config.AWS_ACCESS_KEY,
   secretAccessKey: config.AWS_SECRET_KEY,
 });
 
+const s3Bucket = new AWS.S3();
 /**
  * It uploads a file to S3
  * @param file - The file path of the file to be uploaded
@@ -29,7 +29,7 @@ export const uploadFileToS3 = async (file, Key, Bucket = config.S3_UNPROCESSED_B
     
     const params = { Bucket, Key, Body };
     const response = await s3Bucket.upload(params).promise();
-    LHTLogger.info("awsService:downloadFromS3", `Finished uploading the File: ${Key}`);
+    LHTLogger.info("awsService:uploadToS3", `Finished uploading the File: ${Key}`);
     return response;
   } catch (error) {
     LHTLogger.error("awsService:uploadFileToS3", error.message, {}, error.stack, "Guna R");

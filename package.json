@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "babel-node ./server.js",
-    "test": "mocha -r @babel/register -r regenerator-runtime/runtime",
+    "test": "cross-env NODE_ENV=test mocha -r @babel/register -r regenerator-runtime/runtime --reporter json --reporter-options output=report.json --exit",
     "nodemon": "nodemon --exec babel-node ./server.js"
   },
   "author": "Leewayhertz",
@@ -31,6 +31,7 @@
     "@types/luxon": "^3.2.0",
     "chai": "^4.3.7",
     "chai-http": "^4.3.0",
+    "cross-env": "^7.0.3",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.20",
     "regenerator-runtime": "^0.13.11"

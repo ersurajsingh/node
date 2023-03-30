@@ -52,3 +52,6 @@ Thumbs.db
 
 # vscode files
 .vscode/
+
+# test case report
+report.json

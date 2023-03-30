@@ -56,7 +56,8 @@ export default class HTTPHandler {
     );
   }
 
-  static error(res, error, message = apiFailureMessage.INTERNAL_SERVER_ERROR) {
+  static error(res, error, message) {
+    message = error && error.message || apiFailureMessage.INTERNAL_SERVER_ERROR;
     LHTLogger.error("HTTPHandler:error", message, error, error ? error.stack : "", "Guna R");
     const statusCode = (error && error.statusCode) ? error.statusCode : httpConstants.RESPONSE_CODES.SERVER_ERROR;
     HTTPHandler.response(

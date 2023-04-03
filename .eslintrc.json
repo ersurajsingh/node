@@ -1,0 +1,30 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "extends": ["eslint:recommended", "plugin:import/recommended"],
+  "plugins": ["unused-imports", "import"],
+  "overrides": [
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"],
+    "camelcase": ["error", { "properties": "always" }],
+    "func-names": ["error", "as-needed"],
+    "no-unused-vars": "error",
+    "max-lines-per-function": ["error", { "max": 250 }],
+    "class-methods-use-this": "off",
+    "no-console": "error",
+    "unused-imports/no-unused-imports": "error",
+    "new-cap": ["error", { "capIsNewExceptions": ["Router", "Test"] }]
+  },
+  "globals": {
+    "lhtWebLog": "readonly"
+  }
+}

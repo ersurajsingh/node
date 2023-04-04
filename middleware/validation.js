@@ -1,6 +1,5 @@
-import * as yup from "yup";
-import HTTPHandler from "../app/utils/HTTPHandler";
-
+import * as yup from 'yup';
+import HTTPHandler from '../app/utils/HTTPHandler';
 
 export default {
   validateUserLogin: async (req, res, next) => {

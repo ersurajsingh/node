@@ -2,11 +2,11 @@
  * Created by Developer on 04/04/23.
  */
 
-"use strict";
+'use strict';
 
-import { apiFailureMessage, httpConstants } from "../common/constants";
-import { DateTime } from "luxon";
-import { spawn } from "child_process";
+import { apiFailureMessage, httpConstants } from '../common/constants';
+import { DateTime } from 'luxon';
+import { spawn } from 'child_process';
 
 export default class Utils {
   /**
@@ -42,17 +42,17 @@ export default class Utils {
    * @returns A promise that resolves to the data returned from the command.
    */
   async getDataWithCmd(cmd, query) {
-    let buffer = "";
-    const queryArgs = query.split(" ");
+    let buffer = '';
+    const queryArgs = query.split(' ');
     const response = await new Promise((resolve, reject) => {
       const command = spawn(cmd, queryArgs);
-      command.stdout.on("data", (data) => {
+      command.stdout.on('data', (data) => {
         buffer += data;
       });
 
-      command.on("error", (err) => reject(new Error(err.message)));
+      command.on('error', (err) => reject(new Error(err.message)));
 
-      command.on("close", (code) => {
+      command.on('close', (code) => {
         if (code)
           reject({ message: `Error while executing command: ${cmd}`, code });
         resolve(buffer);
@@ -68,9 +68,9 @@ export default class Utils {
    * @returns A random string of length "length"
    */
   generateRandomAlphaNumericString(length) {
-    let randomAlphaNumericString = "";
+    let randomAlphaNumericString = '';
     let charset =
-      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     for (let i = 0; i < length; i++)
       randomAlphaNumericString += charset.charAt(
         Math.floor(Math.random() * charset.length)
@@ -86,7 +86,7 @@ export const DateTimeHelper = {
    * @param [format=yyyy-MM-dd HH:mm:ss] - The format of the date you want to return.
    * @returns A string with the current date and time in the format "yyyy-MM-dd HH:mm:ss"
    */
-  getFormattedDate(timestamp = Date.now(), format = "yyyy-MM-dd HH:mm:ss") {
+  getFormattedDate(timestamp = Date.now(), format = 'yyyy-MM-dd HH:mm:ss') {
     return DateTime.fromMillis(timestamp).toFormat(format);
   },
 

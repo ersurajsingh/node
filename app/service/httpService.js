@@ -1,5 +1,5 @@
-import axios from "axios";
-import LHTLogger from "../utils/logger";
+import axios from 'axios';
+import LHTLogger from '../utils/logger';
 
 export default class HTTPService {
   /**
@@ -23,7 +23,13 @@ export default class HTTPService {
       });
       return responseData;
     } catch (error) {
-      LHTLogger.error("httpService:executeHTTPRequest", error.message, {}, error.stack, "Guna R");
+      LHTLogger.error(
+        'httpService:executeHTTPRequest',
+        error.message,
+        {},
+        error.stack,
+        'Guna R'
+      );
       throw error;
     }
   }

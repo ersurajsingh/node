@@ -1,11 +1,16 @@
-import Config from ".";
-import mongoose from "mongoose";
-import fs from "fs";
-import LHTLogger from "../app/utils/logger";
+import Config from '.';
+import mongoose from 'mongoose';
+import fs from 'fs';
+import LHTLogger from '../app/utils/logger';
 
 export default class DBConnection {
   static async connect() {
-    LHTLogger.info("DBConnection", `DB trying to connect with ${Config.DB}`, {}, "Developer");
+    LHTLogger.info(
+      'DBConnection',
+      `DB trying to connect with ${Config.DB}`,
+      {},
+      'Developer'
+    );
 
     const options = DBConnection.getDBConnectOptions();
     return mongoose.connect(Config.DB, options);
@@ -18,10 +23,10 @@ export default class DBConnection {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     };
-    if (Config.IS_DOCUMENT_DB !== "true") return options;
+    if (Config.IS_DOCUMENT_DB !== 'true') return options;
 
     // Need to add project specific RDS file in config directory
-    const caContent = [fs.readFileSync(__dirname + "/" + Config.RDS_FILE)];
+    const caContent = [fs.readFileSync(__dirname + '/' + Config.RDS_FILE)];
     return {
       ...options,
       autoReconnect: true,

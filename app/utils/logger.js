@@ -1,6 +1,6 @@
-import Config from "../../config";
-import { DateTimeHelper } from ".";
-import { httpConstants } from "../common/constants";
+import Config from '../../config';
+import { DateTimeHelper } from '.';
+import { httpConstants } from '../common/constants';
 
 export default class LHTLogger {
   /**
@@ -10,7 +10,7 @@ export default class LHTLogger {
    * @param [payload] - This is the object that you want to log.
    * @param [devAlias] - This is the alias of the developer who is logging the message.
    */
-  static info(functionName, message, payload = {}, devAlias = "") {
+  static info(functionName, message, payload = {}, devAlias = '') {
     LHTLogger.log(
       functionName,
       message,
@@ -27,7 +27,7 @@ export default class LHTLogger {
    * @param [payload] - This is the object that you want to log.
    * @param [devAlias] - This is the alias of the developer who is logging the message.
    */
-  static debug(functionName, message, payload = {}, devAlias = "") {
+  static debug(functionName, message, payload = {}, devAlias = '') {
     LHTLogger.log(
       functionName,
       message,
@@ -44,7 +44,7 @@ export default class LHTLogger {
    * @param [payload] - This is an object that contains the data that you want to log.
    * @param [devAlias] - This is the alias of the developer who is logging the message.
    */
-  static warn(functionName, message, payload = {}, devAlias = "") {
+  static warn(functionName, message, payload = {}, devAlias = '') {
     LHTLogger.log(
       functionName,
       message,
@@ -63,7 +63,13 @@ export default class LHTLogger {
    * @param [devAlias] - This is the developer alias that you want to use to identify the developer who
    * is logging the error.
    */
-  static error(functionName, message, payload = {}, errorStack = "", devAlias = "") {
+  static error(
+    functionName,
+    message,
+    payload = {},
+    errorStack = '',
+    devAlias = ''
+  ) {
     const errorOrigin = LHTLogger.parseErrorStack(errorStack);
     LHTLogger.log(
       functionName,
@@ -75,8 +81,19 @@ export default class LHTLogger {
     );
   }
 
-  static log(functionName, message, payload, devAlias, logType, errorOrigin = "") {
-    if (Config.IS_CONSOLE_LOG !== "true" && logType !== httpConstants.LOG_LEVEL_TYPE.ERROR) return;
+  static log(
+    functionName,
+    message,
+    payload,
+    devAlias,
+    logType,
+    errorOrigin = ''
+  ) {
+    if (
+      Config.IS_CONSOLE_LOG !== 'true' &&
+      logType !== httpConstants.LOG_LEVEL_TYPE.ERROR
+    )
+      return;
     let logString = `[${DateTimeHelper.getFormattedDate()}] ${logType} ${errorOrigin}: ${functionName}: ${message}: ${JSON.stringify(
       payload
     )}: Developer : ${devAlias}`;
@@ -98,12 +115,16 @@ export default class LHTLogger {
     let errorOrigin;
     try {
       if (errorStack) {
-          const [fullPath, Function] = errorStack.split('\n')[1].match(/at (.+) \((.+):(\d+):\d+\)/);
-          const filePath = '/app/';
-          errorOrigin = `at ${Function} ${filePath}${fullPath.split(filePath).pop().replace(/\)/g, '')}`;
+        const [fullPath, Function] = errorStack
+          .split('\n')[1]
+          .match(/at (.+) \((.+):(\d+):\d+\)/);
+        const filePath = '/app/';
+        errorOrigin = `at ${Function} ${filePath}${fullPath
+          .split(filePath)
+          .pop()
+          .replace(/\)/g, '')}`;
         return errorOrigin;
       }
     } catch (_) {}
-    
   }
 }

@@ -24,7 +24,8 @@
     "unused-imports/no-unused-imports": "error",
     "new-cap": ["error", { "capIsNewExceptions": ["Router", "Test"] }]
   },
-  "globals": {
+"ignorePatterns": ["app/utils/logger.js","test/*","config/express.js"],
+"globals": {
     "lhtWebLog": "readonly"
   }
 }

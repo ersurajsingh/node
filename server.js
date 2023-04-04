@@ -14,7 +14,7 @@ class Server {
       app.listen(Config.PORT);
       routes(app);
       import("./config/jobInitializer");
-      LhtLogger.info("Server:listen", `Server Started on ${Config.PORT}`, {}, "Ayush K");
+      LhtLogger.info("Server:listen", `Server Started on ${Config.PORT}`, {}, "Developer");
     } catch (error) {
       LhtLogger.error("Server:listen", "failed to connect", { err: error });
       process.exit(1);

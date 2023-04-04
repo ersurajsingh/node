@@ -5,7 +5,7 @@ import LHTLogger from "../app/utils/logger";
 
 export default class DBConnection {
   static async connect() {
-    LHTLogger.info("DBConnection", `DB trying to connect with ${Config.DB}`, {}, "Ayush K");
+    LHTLogger.info("DBConnection", `DB trying to connect with ${Config.DB}`, {}, "Developer");
 
     const options = DBConnection.getDBConnectOptions();
     return mongoose.connect(Config.DB, options);

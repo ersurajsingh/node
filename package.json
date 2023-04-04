@@ -9,7 +9,7 @@
     "nodemon": "nodemon --exec babel-node ./server.js",
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint . --ext .js --fix",
-    "prettier": "prettier --check **/*.js",
+    "prettier": "prettier --check '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'",
     "prepare": "husky install"
   },
@@ -48,7 +48,7 @@
     "regenerator-runtime": "^0.13.11"
   },
   "lint-staged": {
-    "**/*.js": [
+    "*.{js}": [
       "npm run lint",
       "npm run prettier"
     ]

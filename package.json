@@ -6,10 +6,12 @@
   "scripts": {
     "start": "babel-node ./server.js",
     "test": "cross-env NODE_ENV=test mocha -r @babel/register -r regenerator-runtime/runtime --reporter json --reporter-options output=report.json --exit",
+    "nodemon": "nodemon --exec babel-node ./server.js",
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint . --ext .js --fix",
-    "prettier": "prettier --check ./src/**/*.js",
-    "nodemon": "nodemon --exec babel-node ./server.js"
+    "prettier": "prettier --check '**/*.js'",
+    "prettier:fix": "prettier --write '**/*.js'",
+    "prepare": "husky install"
   },
   "author": "Leewayhertz",
   "license": "ISC",
@@ -38,8 +40,17 @@
     "eslint": "^8.37.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "10.2.11",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.20",
+    "prettier": "2.8.7",
     "regenerator-runtime": "^0.13.11"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint",
+      "npm run prettier"
+    ]
   }
 }

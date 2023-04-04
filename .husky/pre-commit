@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+# re-add package.json if there were any other file changes, it will check
+git add ./package.json
+
+npx lint-staged

@@ -3,4 +3,4 @@
 # re-add package.json if there were any other file changes
 git add ./package.json
 
-npm  lint-staged  
+npx lint-staged

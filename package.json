@@ -7,8 +7,8 @@
     "start": "babel-node ./server.js",
     "test": "cross-env NODE_ENV=test mocha -r @babel/register -r regenerator-runtime/runtime --reporter json --reporter-options output=report.json --exit",
     "nodemon": "nodemon --exec babel-node ./server.js",
-    "lint": "eslint . --ext .js",
-    "lint:fix": "eslint . --ext .js --fix",
+    "lint": "./node_modules/.bin/eslint . --ext .js",
+    "lint:fix": "./node_modules/.bin/eslint . --ext .js --fix",
     "prettier": "prettier --check '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'",
     "prepare": "husky install"

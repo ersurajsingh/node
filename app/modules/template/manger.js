@@ -1,7 +1,7 @@
 import LHTLogger from '../../utils/logger';
 
 export default class Manger {
-  async successMethod() {
+  async abcd() {
     // API business logic
     LHTLogger.info('testModule:successMethod', 'Api success', {}, 'Guna R');
     return true;

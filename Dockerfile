@@ -14,7 +14,7 @@ RUN npm install -g forever --production
 # Bundle app source
 COPY --chown=appuser:appgroup . .
 # Expose port
-EXPOSE 3004
+EXPOSE 3000
 # Start npm as non-root
 USER appuser
 # Start the application

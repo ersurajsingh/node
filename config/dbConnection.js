@@ -1,40 +1,38 @@
-import Config from '.';
-import mongoose from 'mongoose';
-import fs from 'fs';
-import LHTLogger from '../app/utils/logger';
+import { MongoClient, ServerApiVersion } from 'mongodb';
 
-export default class DBConnection {
+const uri = 'mongodb+srv://surajs:surajs@cluster0.cvbtg.mongodb.net/?retryWrites=true&w=majority';
+class DBConnection {
+  static client;
+
   static async connect() {
-    LHTLogger.info(
-      'DBConnection',
-      `DB trying to connect with ${Config.DB}`,
-      {},
-      'Developer'
-    );
+    if (!DBConnection.client) {
+      DBConnection.client = new MongoClient(uri, {
+        serverApi: {
+          version: ServerApiVersion.v1,
+          strict: true,
+          deprecationErrors: true,
+        },
+      });
+    }
 
-    const options = DBConnection.getDBConnectOptions();
-    return mongoose.connect(Config.DB, options);
+    try {
+      // Connect the client to the server
+      await DBConnection.client.connect();
+      // Send a ping to confirm a successful connection
+      await DBConnection.client.db('admin').command({ ping: 1 });
+      console.log('Pinged your deployment. You successfully connected to MongoDB!');
+    } catch (error) {
+      console.error('Failed to connect to MongoDB', error);
+      throw error; // Rethrow the error to be caught in server.js
+    }
   }
 
-  static getDBConnectOptions() {
-    const options = {
-      keepAlive: 1,
-      poolSize: 10,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    };
-    if (Config.IS_DOCUMENT_DB !== 'true') return options;
-
-    // Need to add project specific RDS file in config directory
-    const caContent = [fs.readFileSync(__dirname + '/' + Config.RDS_FILE)];
-    return {
-      ...options,
-      autoReconnect: true,
-      ssl: true,
-      sslValidate: false,
-      sslCA: caContent,
-      useCreateIndex: true,
-      retryWrites: false,
-    };
+  static async close() {
+    if (DBConnection.client) {
+      await DBConnection.client.close();
+      console.log('MongoDB connection closed.');
+    }
   }
 }
+
+export default DBConnection;
